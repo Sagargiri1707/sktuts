@@ -27,23 +27,27 @@ workbox.core.clientsClaim();
  */
 self.__precacheManifest = [
   {
-    "url": "webpack-runtime-9dff1349af5aa5b214d7.js"
+    "url": "webpack-runtime-8e7aef3a267913990e17.js"
   },
   {
-    "url": "commons.bde0fcec038cf83a1c98.css"
+    "url": "commons.bd19bb12d0cf5610b37b.css"
   },
   {
-    "url": "commons-88a4a62168c4e72134bc.js"
+    "url": "commons-b3a27167b970d6764626.js"
   },
   {
-    "url": "app-729ae58bf99a69a3ff93.js"
+    "url": "app-3d3388c8fb4e772baa51.js"
   },
   {
     "url": "component---node-modules-gatsby-plugin-offline-app-shell-js-fc634135b768f674de36.js"
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "68e823d75e87284ea99f1243a78fcfa6"
+    "revision": "ccc47e9dcb529812e317606527c138dc"
+  },
+  {
+    "url": "page-data/offline-plugin-app-shell-fallback/page-data.json",
+    "revision": "90a2d3eea7ed458555d0519c192dc36c"
   },
   {
     "url": "manifest.webmanifest",
@@ -70,12 +74,12 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
   }
 
   let { pathname } = new URL(event.request.url)
-  pathname = pathname.replace(new RegExp(`^https://www.sktuts.com/sktuts`), ``)
+  pathname = pathname.replace(new RegExp(`^`), ``)
 
   // Check for resources + the app bundle
   // The latter may not exist if the SW is updating to a new version
   const resources = await idbKeyval.get(`resources:${pathname}`)
-  if (!resources || !(await caches.match(`https://www.sktuts.com/sktuts/app-729ae58bf99a69a3ff93.js`))) {
+  if (!resources || !(await caches.match(`/app-3d3388c8fb4e772baa51.js`))) {
     return await fetch(event.request)
   }
 
@@ -88,7 +92,7 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
     }
   }
 
-  const offlineShell = `https://www.sktuts.com/sktuts/offline-plugin-app-shell-fallback/index.html`
+  const offlineShell = `/offline-plugin-app-shell-fallback/index.html`
   const offlineShellWithKey = workbox.precaching.getCacheKeyForURL(offlineShell)
   return await caches.match(offlineShellWithKey)
 })
